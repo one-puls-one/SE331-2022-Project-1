@@ -1,9 +1,12 @@
 <template>
   <div v-if="patient">
-    <h1>{{ patient.person_name }}</h1>
-    <h3>surname:{{ patient.surname }}</h3>
-    <p>age:{{ patient.person_age }}</p>
-    <p>hometown:{{ patient.person_hometown }}</p>
+    <br />
+    <div class="patinfo">
+      <h3>name: {{ patient.name }}</h3>
+      <h3>surname: {{ patient.surname }}</h3>
+      <p>age: {{ patient.person_age }}</p>
+      <p>hometown: {{ patient.person_hometown }}</p>
+    </div>
   </div>
 </template>
 
@@ -29,3 +32,9 @@ export default {
   }
 }
 </script>
+<style>
+.patinfo {
+  border: 5px burlywood dotted;
+  background-color: lightskyblue;
+}
+</style>

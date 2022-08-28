@@ -1,15 +1,17 @@
 <template>
   <div class="comment-list">
     <h3>Comments</h3>
-    <ul>
-      <li v-for="(comment, index) in comments" :key="index">
-        <div class="list-style">
-          <div class="index-list">{{ index + 1 }}:</div>
-          <div>{{ comment.comment }}</div>
-        </div>
-        <br />
-      </li>
-    </ul>
+    <center>
+      <ul>
+        <li v-for="(comment, index) in comments" :key="index">
+          <div class="list-style">
+            <div class="index-list"></div>
+            <div>{{ comment.comment }}</div>
+          </div>
+          <br />
+        </li>
+      </ul>
+    </center>
   </div>
 </template>
 <script>
@@ -27,17 +29,11 @@ export default {
   border-radius: 5px;
   border: 1px solid black;
   background-color: white;
-  height: auto;
+  height: 100px;
+  width: 500px;
   text-align: center;
   margin-left: 100px;
   margin-right: 100px;
-}
-li {
-  list-style: none;
-}
-.index-list {
-  padding-left: 2px;
-  positon: absolute;
-  float: left;
+  line-height: 100px;
 }
 </style>
