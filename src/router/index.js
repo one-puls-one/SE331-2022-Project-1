@@ -6,6 +6,7 @@ import PatientVaccineView from '@/views/PatientVaccineView.vue'
 import PatientLayoutView from '@/views/PatientLayoutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetWorkErrorView from '@/views/NetworkErrorView.vue'
+import DoctorCommentView from '@/views/DoctorCommentView.vue'
 import NProgress from 'nprogress'
 import PatientService from '@/services/PatientService.js'
 import GStore from '@/store'
@@ -22,7 +23,7 @@ const routes = [
     component: SuggestionView
   },
   {
-    path: '/event/:id',
+    path: '/patient/:id',
     name: 'PatientLayout',
     props: true,
     component: PatientLayoutView,
@@ -53,6 +54,12 @@ const routes = [
         path: '',
         name: 'PatientVaccine',
         component: PatientVaccineView,
+        props: true
+      },
+      {
+        path: '',
+        name: 'DoctorComment',
+        component: DoctorCommentView,
         props: true
       }
     ]
