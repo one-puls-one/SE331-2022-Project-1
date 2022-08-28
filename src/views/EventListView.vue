@@ -1,5 +1,6 @@
 <template>
-  <h1>Events For Good</h1>
+  <h1>Vaccination of some students</h1>
+  <h3>Data from one plus one group</h3>
   <div class="events">
     <EventCard
       v-for="event in events"
@@ -32,8 +33,7 @@
 <script>
 // @ is an alias to /src
 import EventCard from '@/components/EventCard.vue'
-import EventService from '@/services/EventService.js'
-import { watchEffect } from '@vue/runtime-core'
+import PersonService from '@/services/PersonService.js'
 export default {
   name: 'EventListView',
   props: {
@@ -51,23 +51,35 @@ export default {
       totalEvents: 0
     }
   },
-  created() {
-    watchEffect(() => {
-      EventService.getEvents(2, this.page)
-        .then((response) => {
-          this.events = response.data
-          this.totalEvents = response.headers['x-total-count']
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    })
-  },
   computed: {
     hasNextPage() {
-      let totalPages = Math.ceil(this.totalEvents / 2)
+      let totalPages = Math.ceil(this.totalEvents / 3)
       return this.page < totalPages
     }
+  },
+  // eslint-disable-next-line
+  beforeRouteEnter(routeTo, routeFrom, next) {
+    PersonService.getEvents(3, parseInt(routeTo.query.page) || 1)
+      .then((response) => {
+        next((comp) => {
+          comp.events = response.data
+          comp.totalEvents = response.headers['x-total-count']
+        })
+      })
+      .catch(() => {
+        next({ name: 'NetworkError' })
+      })
+  },
+  beforeRouteUpdate(routeTo, routeFrom, next) {
+    PersonService.getEvents(3, parseInt(routeTo.query.page) || 1)
+      .then((response) => {
+        this.events = response.data
+        this.totalEvents = response.headers['x-total-count']
+        next()
+      })
+      .catch(() => {
+        next({ name: 'NetworkError' })
+      })
   }
 }
 </script>

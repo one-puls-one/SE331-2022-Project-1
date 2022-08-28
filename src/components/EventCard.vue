@@ -4,8 +4,9 @@
     :to="{ name: 'EventLayoutView', params: { id: event.id } }"
   >
     <div class="event-card">
-      <span>@{{ event.time }} on {{ event.date }}</span>
-      <h4>{{ event.title }}</h4>
+      <span>{{ event.Vaccine_name }}</span>
+      <h4>{{ event.person_name }}</h4>
+      <span>{{ event.state }}</span>
     </div>
   </router-link>
 </template>
@@ -27,6 +28,7 @@ export default {
   cursor: pointer;
   border: 1px solid #39495c;
   margin-bottom: 18px;
+  background-color: lightcyan;
 }
 
 .event-card:hover {

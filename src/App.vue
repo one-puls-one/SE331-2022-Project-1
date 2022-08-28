@@ -1,11 +1,37 @@
 <template>
+  <div id="flashMessage" v-if="GStore.flashMessage">
+    {{ GStore.flashMessage }}
+  </div>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">homepage</router-link> |
+
+    <router-link to="/about">suggestion</router-link>
   </nav>
   <router-view />
 </template>
+<script>
+export default {
+  inject: ['GStore'], // <----
+  created() {
+    document.title = 'Vaccination'
+  }
+}
+</script>
+<style>
+@keyframes yellowfade {
+  from {
+    background: yellow;
+  }
+  to {
+    background: transparent;
+  }
+}
 
+#flashMessage {
+  animation-name: yellowfade;
+  animation-duration: 3 s;
+}
+</style>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
