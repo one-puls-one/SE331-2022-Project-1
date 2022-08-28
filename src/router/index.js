@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import EventListView from '@/views/EventListView.vue'
+import EventListView from '@/views/HomeView.vue'
 import EventEditView from '@/views/event/EventEditView.vue'
 import EventRegisterView from '@/views/event/EventRegisterView.vue'
 import SuggestionView from '@/views/SuggestionView.vue'

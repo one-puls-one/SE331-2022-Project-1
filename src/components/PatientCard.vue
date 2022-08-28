@@ -3,10 +3,10 @@
     class="event-link"
     :to="{ name: 'EventLayoutView', params: { id: event.id } }"
   >
-    <div class="event-card">
-      <span>{{ event.Vaccine_name }}</span>
-      <h4>{{ event.person_name }}</h4>
-      <span>{{ event.state }}</span>
+    <div class="patient-card">
+      <span>{{ patient.Vaccine_name }}</span>
+      <h4>{{ patient.person_name }}</h4>
+      <span>{{ patient.state }}</span>
     </div>
   </router-link>
 </template>
@@ -14,7 +14,7 @@
 export default {
   name: 'EventCard',
   props: {
-    event: {
+    patient: {
       type: Object,
       required: true
     }
@@ -22,7 +22,7 @@ export default {
 }
 </script>
 <style scoped>
-.event-card {
+.patient-card {
   padding: 20px;
   width: 250px;
   cursor: pointer;
@@ -31,12 +31,12 @@ export default {
   background-color: lightcyan;
 }
 
-.event-card:hover {
+.patient-card:hover {
   transform: scale(1.01);
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
 }
 
-.event-link {
+.patient-link {
   color: #2c3e50;
   text-decoration: none;
 }
