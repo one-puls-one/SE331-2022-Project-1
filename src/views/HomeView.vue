@@ -1,12 +1,12 @@
 <template>
   <h1>Vaccination of some students</h1>
   <h3>Data from one plus one group</h3>
-  <div class="events">
-    <EventCard
-      v-for="event in events"
-      :key="event.id"
-      :event="event"
-    ></EventCard>
+  <div class="patients">
+    <PatientCard
+      v-for="patient in patients"
+      :key="patient.id"
+      :patient="patient"
+    ></PatientCard>
 
     <div class="pagination">
       <router-link
@@ -32,10 +32,10 @@
 
 <script>
 // @ is an alias to /src
-import EventCard from '@/components/EventCard.vue'
+import PatientCard from '@/components/PatientCard.vue'
 import PersonService from '@/services/PersonService.js'
 export default {
-  name: 'EventListView',
+  name: 'HomeView',
   props: {
     page: {
       type: Number,
@@ -43,27 +43,27 @@ export default {
     }
   },
   components: {
-    EventCard
+    PatientCard
   },
   data() {
     return {
-      events: null,
-      totalEvents: 0
+      patients: null,
+      totalpatients: 0
     }
   },
   computed: {
     hasNextPage() {
-      let totalPages = Math.ceil(this.totalEvents / 3)
+      let totalPages = Math.ceil(this.totalpatients / 4)
       return this.page < totalPages
     }
   },
   // eslint-disable-next-line
   beforeRouteEnter(routeTo, routeFrom, next) {
-    PersonService.getEvents(3, parseInt(routeTo.query.page) || 1)
+    PersonService.getPatients(3, parseInt(routeTo.query.page) || 1)
       .then((response) => {
         next((comp) => {
-          comp.events = response.data
-          comp.totalEvents = response.headers['x-total-count']
+          comp.patients = response.data
+          comp.totalpatients = response.headers['x-total-count']
         })
       })
       .catch(() => {
@@ -71,10 +71,10 @@ export default {
       })
   },
   beforeRouteUpdate(routeTo, routeFrom, next) {
-    PersonService.getEvents(3, parseInt(routeTo.query.page) || 1)
+    PersonService.getPatients(3, parseInt(routeTo.query.page) || 1)
       .then((response) => {
-        this.events = response.data
-        this.totalEvents = response.headers['x-total-count']
+        this.patients = response.data
+        this.totalPatients = response.headers['x-total-count']
         next()
       })
       .catch(() => {
@@ -84,7 +84,7 @@ export default {
 }
 </script>
 <style scoped>
-.events {
+.patients {
   display: flex;
   flex-direction: column;
   align-items: center;
