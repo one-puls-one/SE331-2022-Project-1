@@ -4,7 +4,6 @@
   </div>
   <nav>
     <router-link to="/">homepage</router-link> |
-
     <router-link to="/about">suggestion</router-link>
   </nav>
   <router-view />
@@ -33,6 +32,22 @@ export default {
 }
 </style>
 <style>
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  background-image: url('./assets/back.jpeg');
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: absolute;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
