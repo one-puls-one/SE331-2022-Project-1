@@ -1,20 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import EventListView from '@/views/HomeView.vue'
-import EventEditView from '@/views/event/EventEditView.vue'
-import EventRegisterView from '@/views/event/EventRegisterView.vue'
+import HomeView from '@/views/HomeView.vue'
 import SuggestionView from '@/views/SuggestionView.vue'
-import EventLayoutView from '@/views/event/EventLayoutView.vue'
-import EventDetailView from '@/views/event/EventDetailView.vue'
+import PatientDetailView from '@/views/PatientDetailView.vue'
+import PatientVaccineView from '@/views/PatientVaccineView.vue'
+import PatientLayoutView from '@/views/PatientLayoutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetWorkErrorView from '@/views/NetworkErrorView.vue'
 import NProgress from 'nprogress'
-import PersonService from '@/services/PersonService'
+import PatientService from '@/services/PatientService.js'
 import GStore from '@/store'
 const routes = [
   {
     path: '/',
-    name: 'EventList',
-    component: EventListView,
+    name: 'Home',
+    component: HomeView,
     props: (route) => ({ page: parseInt(route.query.page) || 1 })
   },
   {
@@ -24,19 +23,19 @@ const routes = [
   },
   {
     path: '/event/:id',
-    name: 'EventLayoutView',
+    name: 'PatientLayout',
     props: true,
-    component: EventLayoutView,
+    component: PatientLayoutView,
     beforeEnter: (to) => {
-      return PersonService.getEvent(to.params.id)
+      return PatientService.getPatient(to.params.id)
         .then((response) => {
-          GStore.event = response.data
+          GStore.patient = response.data
         })
         .catch((error) => {
           if (error.response && error.response.status == 404) {
             this.$router.push({
               name: '404Resource',
-              params: { resource: 'event' }
+              params: { resource: 'patient' }
             })
           } else {
             this.$router.push({ name: 'NetworkError' })
@@ -46,21 +45,15 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'EventDetails',
-        component: EventDetailView,
+        name: 'PatientDetail',
+        component: PatientDetailView,
         props: true
       },
       {
-        path: 'register',
-        name: 'EventRegister',
-        props: true,
-        component: EventRegisterView
-      },
-      {
-        path: 'edit',
-        name: 'EventEdit',
-        props: true,
-        component: EventEditView
+        path: '',
+        name: 'PatientVaccine',
+        component: PatientVaccineView,
+        props: true
       }
     ]
   },

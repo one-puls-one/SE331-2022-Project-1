@@ -1,7 +1,7 @@
 <template>
   <router-link
-    class="event-link"
-    :to="{ name: 'EventLayoutView', params: { id: event.id } }"
+    class="patient-link"
+    :to="{ name: 'PatientLayout', params: { id: patient.id } }"
   >
     <div class="patient-card">
       <span>{{ patient.Vaccine_name }}</span>
@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-  name: 'EventCard',
+  name: 'PatientCard',
   props: {
     patient: {
       type: Object,

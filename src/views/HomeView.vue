@@ -11,7 +11,7 @@
     <div class="pagination">
       <router-link
         id="page-prev"
-        :to="{ name: 'EventList', query: { page: page - 1 } }"
+        :to="{ name: 'Home', query: { page: page - 1 } }"
         rel="prev"
         v-if="page != 1"
       >
@@ -20,7 +20,7 @@
 
       <router-link
         id="page-next"
-        :to="{ name: 'EventList', query: { page: page + 1 } }"
+        :to="{ name: 'Home', query: { page: page + 1 } }"
         rel="next"
         v-if="hasNextPage"
       >
@@ -33,7 +33,7 @@
 <script>
 // @ is an alias to /src
 import PatientCard from '@/components/PatientCard.vue'
-import PersonService from '@/services/PersonService.js'
+import PersonService from '@/services/PatientService.js'
 export default {
   name: 'HomeView',
   props: {
